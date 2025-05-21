@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<!-- ********************************************** -->
+<!-- Automates the build of QPUtility.jar ********* -->
+<!-- Dependent files not included and should ****** -->
+<!-- be added seperately to your projects classpath -->
+<!-- ********************************************** -->
+
+<project name="QPUtility" default="build" basedir="../">
+    
+    <property name="classes.dir" location="build/classes" description="The temporary class directory."/>
+    
+    <tstamp description="for versioning">
+        <format property="tstamp" pattern="MMddyy"/>
+    </tstamp>
+    
+    <!-- set classpath -->
+    <path id="project.class.path">
+        <pathelement location="${classes.dir}"/>
+        <fileset dir="lib" includes="**/*.jar"/>
+    </path>
+    
+    <target name="javac" description="Compile java source">
+        <mkdir dir="${classes.dir}"/>
+        <javac srcdir="src" includes="**" encoding="utf-8"
+            destdir="${classes.dir}"
+            source="1.5" target="1.5" nowarn="true"
+            debug="true" debuglevel="lines,vars,source">
+            <classpath refid="project.class.path"/>
+        </javac>
+        <copy todir="${classes.dir}">
+            <fileset dir="src" excludes="**/*.java"/>
+        </copy>
+    </target>
+    
+    <target name="jar" description="Create jar file" depends="javac">
+        <jar destfile="build/${ant.project.name}_ver.${tstamp}.jar"
+            basedir="build/classes"/>
+    </target>
+    
+    <target name="build" depends="jar">
+        <echo>Done building project.</echo>
+        <!-- now tidy up -->
+        <delete includeemptydirs="true">
+            <fileset dir="${classes.dir}"/>
+        </delete>
+    </target>
+    
+</project>

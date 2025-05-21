@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<root>
+    
+    <!-- This file represents the various config test types -->
+    
+    <!-- A simple <String, String> key value pair -->
+    <entry>
+        <key>StringTest</key>
+        <value>The value for my key</value>
+    </entry>
+    
+    <!-- A list type -->
+    <list>
+        <key>ListTest</key>
+        <value>test@gov.bc.ca</value>
+    </list>
+    
+    <!-- Content to be converted to a Document type -->
+    <entry>
+    	<key>XMLtest</key>
+    	<value type="org.w3c.dom.Document">
+	    	<meta>
+				<root_element_name_resolution>
+					<element name="act" friendlyName="Act"/>
+					<element name="act_pit" friendlyName="Act Point in Time"/>
+					<element name="ht" friendlyName="Historical Table"/>
+					<element name="reg_pit" friendlyName="Regulation Point in Time"/>
+					<element name="regulation" friendlyName="Regulation"/>
+					<element name="tlc" friendlyName="Table of Legislative Changes"/>
+				</root_element_name_resolution>
+			</meta>
+    	</value>
+    </entry>
+    
+    <!-- A test bean to be un-marshalled TestBean class -->
+    <entry>
+    	<key>JAXBtest</key>
+    	<value type="test.support.beans.TestBean">
+    		<testBean>
+			    <testProperty_one testAttr1="test_attr_one" testAttr2="test_attr_two"/>
+			    <testProperty_two>
+			        <test_sub>content of test sub one</test_sub>
+			        <test_sub>content of test sub two</test_sub>
+			        <test_sub>content of test sub three</test_sub>
+			    </testProperty_two>
+			</testBean>
+    	</value>
+    </entry>
+    
+</root>
